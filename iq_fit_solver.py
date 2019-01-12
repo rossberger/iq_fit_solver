@@ -244,7 +244,7 @@ def solve(board, pieces, depth=0):
 
     return retval
 
-def explore(board, row, col):
+def get_region_size(board, row, col):
     """
     Performs a DFS to find all contiguous empty cells in the region containing
     the cell (row,col).  Returns the size of the region.
@@ -253,8 +253,8 @@ def explore(board, row, col):
             0 1 1 1 0
             0 0 0 0 0
 
-    explore(board, 0, 0) --> 9
-    explore(board, 0, 2) --> 1
+    get_region_size(board, 0, 0) --> 9
+    get_region_size(board, 0, 2) --> 1
 
     Note that "contiguous" only includes cardinal directions (up, down, left,
     right) and not diagonals, since the playing pieces have no diagonals.
@@ -268,16 +268,16 @@ def explore(board, row, col):
         brows, bcols = board.shape
         # Up
         if (row - 1) >= 0:
-            retval += explore(board, row - 1, col)
+            retval += get_region_size(board, row - 1, col)
         # Down
         if (row + 1) < brows:
-            retval += explore(board, row + 1, col)
+            retval += get_region_size(board, row + 1, col)
         # Left
         if (col - 1) >= 0:
-            retval += explore(board, row, col - 1)
+            retval += get_region_size(board, row, col - 1)
         # Right
         if (col + 1) < bcols:
-            retval += explore(board, row, col + 1)
+            retval += get_region_size(board, row, col + 1)
 
     return retval
 
@@ -306,7 +306,7 @@ def fails(board):
             if new_board[row][col] == 0:
                 # Found new region of one or more zeroes at (row, col)
                 # Determine how large the region is
-                region_size = explore(new_board, row, col)
+                region_size = get_region_size(new_board, row, col)
                 if region_size < 4:
                     # Since there are no pieces are smaller than 4 we know
                     # this region can't be filled by any board piece, so it
