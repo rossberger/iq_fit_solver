@@ -337,7 +337,7 @@ def main():
 
     print("Running solver...")
     start_time = datetime.datetime.now()
-    count = solve(BOARD_120, pieces)
+    count = solve(board, pieces)
     end_time = datetime.datetime.now()
     dt_sec = (end_time - start_time).total_seconds()
     print("Found %d solutions in %f seconds" % (count, dt_sec))
