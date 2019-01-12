@@ -29,6 +29,13 @@ Requirements:
     - numpy
     - colorama
 
+Usage:
+    - Define a board in this file.  See examples below.
+    - Update main to use the board you defined.
+      E.g., if you defined BOARD_100, main should have "board = BOARD_100"
+    - Run:
+      $ python iq_fit_solver.py
+
 """
 import datetime
 import numpy as np
